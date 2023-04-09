@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include("../connection/conn.php");
+require("../connection/conn.php");
 if(!isset($_SESSION['email'])){
   header("Location: index.php");
 };
@@ -64,17 +64,17 @@ if(!isset($_SESSION['email'])){
                       colis
                     </td>
                     <td>
-                    <?php 
+                    <?php
                   if(isset($_POST['poids'])){
-                    $poids = $_SESSION['poids'];
+                    $poids = $_POST['poids'];
                     $stmt2 = $pdo->prepare('SELECT `price` FROM `tarif_par_produit_colis` WHERE `from` < :lepoids AND `to`>= :lepoids');
                     $stmt2->execute(['lepoids' => $poids]);
                     $row = $stmt2->fetch(PDO::FETCH_ASSOC);
-                    if(!empty($row)){
-                        echo "$row";
+                    if($row){
+                        echo $row['price'];
                     }
                         else{
-                            echo $_SESSION['poids'];
+                            echo "<div>-</div>";
                         }
                      }
                 ?>
@@ -87,24 +87,22 @@ if(!isset($_SESSION['email'])){
                     <td>courrier</td>
                     <td>
                         <?php
-                        function calculate($poids, $type){
-                            $stmt2 = $pdo->prepare('SELECT `price` FROM `tarif_par_produit_courier` WHERE `from` < :lepoids AND `to`>:lepoids');
-                            $stmt2->execute(['lepoids' => $poids]);
-                            $username = $stmt2->fetchColumn(0);
-                            if(!empty($username)){
-                                echo "$username";
-                            }
-                            else {
-                                echo "<div> Not" . $poids, $type . "</div>";
-                            }
-                        }
                         if(isset($_POST['poids'])){
-                            $poids = $_SESSION['poids'];
-                            $type = $_SESSION['type'];
+                            $poids = $_POST['poids'];
+                            $type = $_POST['type'];
                             if($type != "kg") {
                                 $poids = $poids / 1000;
                             }
-                            calculate($poids, $type);
+                            global $pdo;
+                            $stmt2 = $pdo->prepare('SELECT `price` FROM `tarif_par_produit_courier` WHERE `from` < :lepoids AND `to`>:lepoids');
+                            $stmt2->execute(['lepoids' => $poids]);
+                            $username = $stmt2->fetch(PDO::FETCH_ASSOC);
+                            if(!empty($username)){
+                                echo $username['price'];
+                            }
+                            else {
+                                echo "<div>-</div>";
+                            }
                         }
                         ?>
                     </td>
