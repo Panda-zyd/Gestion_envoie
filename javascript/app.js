@@ -1,5 +1,2 @@
-const value = document.querySelector("#root");
-document.querySelector("#form").addEventListener("submit", (event) => {
-  // event.preventDefault();
-  // alert("sup boi");
-});
+const close = document.querySelector(".close");
+close.addEventListener("hover", alert("sup boiaaaaaa"));

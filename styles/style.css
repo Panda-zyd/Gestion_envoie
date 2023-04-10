@@ -13,6 +13,7 @@ body {
   position: absolute;
   z-index: 9999;
   color: white;
+  top: 0;
 }
 
 html,
@@ -48,10 +49,10 @@ body {
 }
 
 .form-content .form-items {
-  border: 3px solid #fff;
+  border: 3px solid #ffffff;
   padding: 40px;
   display: inline-block;
-  width: 100%;
+  max-width: 100%;
   min-width: 540px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -88,6 +89,7 @@ body {
 .was-validated .form-check-input:valid~.form-check-label {
   color: #fff;
 }
+
 
 .form-content input[type=text],
 .form-content input[type=password],

@@ -36,9 +36,9 @@ if(!isset($_SESSION['email'])){
                         <h3>
                           Calculer le prix
                         </h3>
-                        <form class="requires-validation" method="post">
+                        <form class="requires-validation" id="myForm" method="post">
                             <div class="col-md-12">
-                                <input class="text-dark form-control"  value="<?php echo isset($_POST['poids']) ? $_POST['poids'] : ''; ?>" id="input" type="text" name="poids" placeholder="Poids" required>
+                                <input class="text-dark form-control"  value="<?php echo isset($_POST['poids']) ? $_POST['poids'] : ''; ?>" id="input" type="number" name="poids" placeholder="Poids" required>
                                 <select name="type" id="type" required>
                                   <option value="kg">Kg</option>
                                   <option value="g">g</option>
@@ -50,6 +50,7 @@ if(!isset($_SESSION['email'])){
                                 <button id="submit" type="submit" class="btn btn-primary">Afficher les prix</button>
                             </div>
                         </form>
+                        <div id="result"></div>
                 </div>
               </div>
               <div id="table">
@@ -67,20 +68,35 @@ if(!isset($_SESSION['email'])){
                     <?php
                   if(isset($_POST['poids'])){
                     $poids = $_POST['poids'];
+                      $type = $_POST['type'];
+                      if($type != "kg") {
+                          $poids = $poids / 1000;
+                      }
                     $stmt2 = $pdo->prepare('SELECT `price` FROM `tarif_par_produit_colis` WHERE `from` < :lepoids AND `to`>= :lepoids');
                     $stmt2->execute(['lepoids' => $poids]);
                     $row = $stmt2->fetch(PDO::FETCH_ASSOC);
                     if($row){
-                        echo $row['price'];
+                        echo "<div>".$row['price']."</div>";
+                          $courier_price = $row['price'];
                     }
                         else{
                             echo "<div>-</div>";
                         }
-                     }
+                     } else {
+                      echo "<script>document.querySelector('#table').style.display = 'none'</script>";
+                  }
                 ?>
                     </td>
                     <td>
-                      <a href="#" target="_self" rel="noopener noreferrer">proceed</a>
+                    <?php 
+                    if(!empty($courier_price)){
+                      echo "<a 
+                      href='proceed.php?type=colis&price=".$courier_price."' 
+                      class='proceed'>Proceed</a>";
+                    }else{
+                      echo "<a href='#' class='proceed disabled-link'>Proceed</a>";
+                    }
+                    ?>
                     </td>
                   </tr>
                   <tr>
@@ -98,7 +114,8 @@ if(!isset($_SESSION['email'])){
                             $stmt2->execute(['lepoids' => $poids]);
                             $username = $stmt2->fetch(PDO::FETCH_ASSOC);
                             if(!empty($username)){
-                                echo $username['price'];
+                                echo "<div>".$username['price']."</div>";
+                                $newprice = $username['price'];
                             }
                             else {
                                 echo "<div>-</div>";
@@ -107,7 +124,15 @@ if(!isset($_SESSION['email'])){
                         ?>
                     </td>
                     <td>
-                      <a href="#" target="_self" rel="noopener noreferrer">proceed</a>
+                    <?php 
+                      // $link = "proceed/page.php?type=courier&" . http_build_query(array("theprice" => $row['price'])); 
+                      //   echo "<a class='proceed' href='$link'>Proceed</a>";
+                      if(!empty($newprice)){
+                        echo "<a href='proceed.php?type=courier&price=".$newprice."' class='proceed'>Proceed</a>";
+                      }else{
+                        echo "<a href='#' class='proceed disabled-link'>Proceed</a>";
+                      }
+                      ?>
                     </td>
 
                   </tr>
@@ -121,5 +146,7 @@ if(!isset($_SESSION['email'])){
 
 </div>
 </body>
-<script src="../javascript/app.js"></script>
+<script>
+  require("../javascript/app.js");
+</script>
 </html>

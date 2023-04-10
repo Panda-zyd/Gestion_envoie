@@ -1,8 +1,10 @@
-<div class="ms">
+<div style="display: none" class="msg">
 <?php
 require("../connection/conn.php");
 session_start();
-echo $_SESSION['error'];
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 ?>
 </div>
 <!DOCTYPE html>
@@ -40,9 +42,9 @@ echo $_SESSION['error'];
                            </div>
                            <div>
                             <?php if(isset($_SESSION['error'])){
-                              echo '<div class="msg".'.$_SESSION['error'] . '</div>';
+                              echo '<div class="text-danger pt-2">'.$_SESSION['error'] . '</div>';
                               unset($_SESSION['error']);
-                            }; ?>
+                            } ?>
                            </div>
                             <div class="form-button mt-3">
                                 <button id="submit" type="submit" class="btn btn-primary">Login</button>

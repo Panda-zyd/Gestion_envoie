@@ -1,12 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&display=swap');
+
 .header {
   width: 100%;
   background-color: rgb(185, 185, 185);
   display: flex;
   color: black;
   align-items: center;
+  position: sticky;
+  top: 0;
+  font-family: 'Schibsted Grotesk', sans-serif;
   justify-content: space-between;
   padding: 15px 45px;
 }
+
+
+
 
 .msg {
   color: white;
@@ -26,9 +34,9 @@
 #type {
   position: absolute;
   width: fit-content;
-  right: 110px;
+  right: 107px;
   background-color: black;
-  top: 139px;
+  top: 127px;
 }
 
 #input {
@@ -60,7 +68,6 @@ body {
   overflow-x: hidden;
 }
 
-
 .form-holder {
   display: flex;
   flex-direction: column;
@@ -73,12 +80,43 @@ body {
   color: white;
   border: 1px solid white;
   padding: 7px;
+  font-family: 'Schibsted Grotesk', sans-serif;
 }
 
+/*#table{*/
+/*  display: none;*/
+/*}*/
 #table table {
   width: 600px;
   border-collapse: collapse;
   margin-bottom: 100px;
+}
+
+.proceed {
+  border: none !important;
+  text-decoration: none;
+  color: black !important;
+  border-radius: 50px;
+  transition: .3s ease;
+  cursor: pointer;
+  padding: 7px 17px !important;
+  background: rgb(221, 255, 170);
+}
+
+.disabled-link {
+  background-color: grey;
+  pointer-events: none;
+  user-select: none;
+}
+
+.proceed:hover {
+  background: rgb(173, 255, 47);
+  box-shadow: 0px 0px 20px 5px rgba(107, 255, 0, 0.89);
+
+}
+
+.new {
+  padding: 0 !important;
 }
 
 .form-holder .form-content {
@@ -94,6 +132,11 @@ body {
   -webkit-align-items: center;
   align-items: center;
   padding: 60px;
+}
+
+#day-input {
+  padding: 12px;
+  margin-top: 7px;
 }
 
 .form-content .form-items {
@@ -112,7 +155,7 @@ body {
 
 .form-content h3 {
   color: #fff;
-  text-align: left;
+  text-align: center;
   font-size: 28px;
   font-weight: 600;
   margin-bottom: 5px;
@@ -124,7 +167,7 @@ body {
 
 .form-content p {
   color: #fff;
-  text-align: left;
+  text-align: center;
   font-size: 17px;
   font-weight: 300;
   line-height: 20px;
@@ -132,15 +175,15 @@ body {
 }
 
 
-.form-content label,
-.was-validated .form-check-input:invalid~.form-check-label,
-.was-validated .form-check-input:valid~.form-check-label {
-  color: #fff;
+
+#disabledTextInput1 {
+  margin-right: 12px !important;
 }
 
 .form-content input[type=text],
 .form-content input[type=password],
 .form-content input[type=email],
+.form-content input[type=date],
 .form-content select {
   width: 100%;
   padding: 9px 20px;
