@@ -10,19 +10,10 @@ $stmt->execute(['email' => $email, 'password' => $password]);
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if ($row) {
-    $stmt2 = $pdo->prepare('SELECT `name` FROM agent WHERE `email` = :email');
-    $stmt3 = $pdo->prepare('SELECT `code_agent` FROM agent WHERE `email`=:email');
-    $stmt4 = $pdo->prepare('SELECT `code_agency` FROM agent WHERE `email`=:email');
-    $stmt2->execute(['email' => $email]);
-    $stmt3->execute(['email' => $email]);
-    $stmt4->execute(['email' => $email]);
-    $agent_id = $stmt3->fetchColumn();
-    $username = $stmt2->fetchColumn();
-    $agency_id = $stmt4->fetchColumn();
-    $_SESSION['username'] = $username;
-    $_SESSION['agent_id'] = $agent_id;
-    $_SESSION['agency_id'] = $agent_id;
-    $_SESSION['email'] = $email;
+    $_SESSION['agent_id'] = $row['code_agent'];
+    $_SESSION['agency_id'] = $row['code_agency'];
+    $_SESSION['email'] = $row['email'];
+    $_SESSION['username'] = $row['name'];
     header('Location: ../views/dashboard.php');
 } else {
     $_SESSION['error'] = "Invalid Email or password";

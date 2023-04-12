@@ -1,6 +1,10 @@
 <?php 
 require("../connection/conn.php");
 session_start();
+if(!isset($_SESSION['email'])){
+  header("Location: index.php");
+}
+echo "<div class='message'>".$_SESSION['message']."</div>";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +26,11 @@ session_start();
 </html>
 <body style="overflow-y:auto">
   <div class="form-body">
+      <div class="message">
+<!--          --><?php //if(isset($_SESSION['message'])){
+//              echo "<script>alert(`".$_SESSION['message']."`)</script>";
+//          } ?>
+      </div>
     <div class="row">
       <div class="form-holder">
         <div class="form-content">
@@ -33,8 +42,15 @@ session_start();
               action="../controllers/proceed.php"
               method="post"
             >
+                <input value="<?php echo $_GET['type']; ?>" type="hidden" name="type" />
+                <input value="<?php echo $_SESSION['agent_id']; ?>" type="hidden" name="code_agent" />
+                <input value="<?php echo $_SESSION['agency_id']; ?>" type="hidden" name="code_agency" />
+                <input value="<?php echo $_GET['price']; ?>" type="hidden" name="price" />
               <div class="col-md-12">
-                <input 
+              <label class="form-check-label" for="expediteur">
+                Sender
+              </label>
+                <input
                   class="text-dark from-control"
                   name="expediteur"
                   type="text"
@@ -44,20 +60,24 @@ session_start();
               </div>
               <div class="row g-3" style=" display:flex!important;justify-content:space-between!important;">
                 <div class="col">
-                <input 
+                <label class="form-check-label" for="type">
+                    Type:
+                </label>
+                <input
                   value="<?php echo $_GET['type']; ?>"
                   class="new-inputleft text-dark from-control"
-                  name="expediteur"
                   type="text"
                   placeholder="Type"
                   disabled
                 />
                 </div>
                 <div class="col">
-                <input 
+                <label class="form-check-label" for="code_agency">
+                    Prix
+                </label>
+                <input
                   value="<?php echo $_GET['price']; ?>"
                   class="new-inputright text-dark from-control"
-                  name="expediteur"
                   type="text"
                   placeholder="Prix"
                   disabled
@@ -65,9 +85,12 @@ session_start();
                 </div>
               </div>
               <div class="col-md-12">
+              <label class="form-check-label" for="destination">
+                Destination
+              </label>
                 <select
                   class="text-dark from-select"
-                  name="expediteur"
+                  name="destination"
                   type="text"
                   placeholder="Destination"
                   required
@@ -75,30 +98,58 @@ session_start();
                   <option value="" disabled selected>
                     select a Destination
                   </option>
-                  <?php 
+                  <?php
                     $stmt = $pdo->prepare("SELECT * from `agency`");
                     $stmt->execute();
                     $row = $stmt->fetchAll();
                     if($row){
                       // echo $row["nom_agency"];
                       foreach($row as $rows){
-                        echo "<option value=".$rows['city'].">".$rows['nom_agency']."</option>";
+                        echo "<option value=".$rows['nom_agency'].">".$rows['nom_agency']."</option>";
                     }}
                   ?>
                 </select>
               </div>
               <div class="col-md-12">
+              <label class="form-check-label" for="code_agency">
+                date
+              </label>
                 <input type="date" id="day-input" name="date" min="2023-01-01">
               </div>
               <div class="col-md-12">
                 <div class="row g-3" style=" display:flex!important;justify-content:space-between!important;">
                   <div class="col">
-                  <input type="text" name="code_agent" id="" value="<?php echo $_SESSION['agent_id'] ?>" disabled>
+                  <label class="form-check-label" for="code_agent">
+                    Code agent
+                  </label>
+                  <input type="text" id="" value="<?php echo $_SESSION['agent_id'] ?>" disabled>
+
                   </div>
                   <div class="col">
-                  <input type="text" name="code_agency" id="" value="<?php echo $_SESSION['agency_id'] ?>" disabled>
+                  <label class="form-check-label" for="code_agency">
+                    Code agency
+                  </label>
+                  <input type="text" id="" value="<?php echo $_SESSION['agency_id'] ?>" disabled>
+
                   </div>
                 </div>
+              </div>
+              <div class="col-md-12">
+              <div class="row g-3" style=" display:flex!important;justify-content:space-between!important;">
+                    <div class="col">
+                    <input class="form-check-input" type="checkbox" name="fragile" value="" id="fragile">
+                  <label class="form-check-label" for="fragile">
+                    Fragile
+                  </label>
+                    </div>
+                    <div class="col">
+                    <input class="form-check-input" type="checkbox" name="cache_en_delivery" value="" id="cache_en_delivery">
+              <label class="form-check-label" for="cache_en_delivery">
+                Cache en delivery
+              </label>
+
+                    </div>
+            </div>
               </div>
               <div class="form-button mt-3">
                 <a href="dashboard.php" class="btn btn-danger">< Go back</a>

@@ -4,6 +4,11 @@ require("../connection/conn.php");
 if(!isset($_SESSION['email'])){
   header("Location: index.php");
 };
+if(isset($_SESSION['worked'])and $_SESSION['worked']){
+echo "<div class='message-success'>".$_SESSION['message_success']."</div>";
+}else if(isset($_SESSION['message_failed'])){
+    echo "<div class='message-failed'>".$_SESSION['message_failed']."</div>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
