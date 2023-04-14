@@ -1,16 +1,6 @@
 <?php 
-session_start();
 require("../connection/conn.php");
-if(!isset($_SESSION['email'])){
-  header("Location: index.php");
-};
-if(isset($_SESSION['worked'])and $_SESSION['worked']){
-echo "<div id='message-success' class='message-success'>".$_SESSION['message_success']."</div>";
-}else if(isset($_SESSION['message_failed'])){
-    echo "<div id='message-failed' class='message-failed'>".$_SESSION['message_failed']."</div>";
-}
-unset($_SESSION['worked']);
-unset($_SESSION['message_failed']);
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,11 +9,10 @@ unset($_SESSION['message_failed']);
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
   <title>Document</title>
 </head>
 <style>
-  <?php include("../styles/dashboard.css") ?>
+  <?php require("../styles/dashboard.css"); ?>
 </style>
 <body onload="load()">
   <div id="root"></div>
@@ -45,7 +34,7 @@ unset($_SESSION['message_failed']);
                         </h3>
                         <form class="requires-validation" id="myForm" method="post">
                             <div class="col-md-12">
-                                <input class="text-dark form-control"  value="<?php echo isset($_POST['poids']) ? $_POST['poids'] : ''; ?>" id="input" type="number" name="poids" placeholder="Poids" required>
+                                <input class="text-dark form-control" id="input" type="number" name="poids" placeholder="Poids" required>
                                 <select name="type" id="type" required>
                                   <option value="kg">Kg</option>
                                   <option value="g">g</option>
@@ -152,9 +141,4 @@ unset($_SESSION['message_failed']);
 
 </div>
 </body>
-<script>
-  require("../javascript/app.js");
-
-
-</script>
 </html>

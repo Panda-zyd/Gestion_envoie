@@ -5,13 +5,8 @@ session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-?></div>
-<?php
-if(isset($_SESSION['inactive_user'])){
-  echo "<div class='inactive_user'>".$_SESSION['inactive_user']."</div>";
-  unset($_SESSION["inactive_user"]);
-}
 ?>
+</div>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +16,7 @@ if(isset($_SESSION['inactive_user'])){
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestion commandes</title>
+  <title>ADMIN LOGIN</title>
 </head>
 <style>
   <?php require("../styles/style.css") ?>
@@ -30,7 +25,7 @@ if(isset($_SESSION['inactive_user'])){
 <div class='header'>
     <div><img src="../assets/poste_logo.png" /></div>
     <div>
-      <a href="../views/admin.php" title="go to admin dashboard" class="btn btn-warning">admin</a>
+      <a href="../views/index.php" title="go to employers dashboard" class="btn btn-warning">Employer</a>
     </div>
 </div>
 <div class="form-body">
@@ -38,11 +33,11 @@ if(isset($_SESSION['inactive_user'])){
             <div class="form-holder">
                 <div class="form-content">
                     <div class="form-items">
-                        <h3>Login</h3>
+                        <h3>ADMIN AUTHENTIFICATION</h3>
                         <p>Fill in the data below.</p>
-                        <form class="requires-validation" action="../controllers/login.php" method="post">
+                        <form class="requires-validation" action="../controllers/admin.php" method="post">
                             <div class="col-md-12">
-                                <input onchange="check()" class="text-dark form-control" type="email" name="email" placeholder="E-mail Address" required>
+                                <input onchange="check()" class="text-dark form-control" type="text" name="username" placeholder="username" required>
                             </div>
                            <div class="col-md-12">
                               <input onchange="check()" class="text-dark form-control" type="password" name="password" placeholder="Password" required>

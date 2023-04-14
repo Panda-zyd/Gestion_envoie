@@ -5,6 +5,7 @@ if(!isset($_SESSION['email'])){
   header("Location: index.php");
 }
 echo "<div class='message'>".$_SESSION['message']."</div>";
+var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,6 +86,8 @@ echo "<div class='message'>".$_SESSION['message']."</div>";
                 </div>
               </div>
               <div class="col-md-12">
+              <div class="row g-3" style=" display:flex!important;justify-content:space-between!important;">
+              <div class="col">
               <label class="form-check-label" for="destination">
                 Destination
               </label>
@@ -110,6 +113,28 @@ echo "<div class='message'>".$_SESSION['message']."</div>";
                   ?>
                 </select>
               </div>
+                    <div class="col">
+                      <label for="destinataire" class="form-check-label">Destinataire</label>
+                      <input
+                  class="new-inputright text-dark from-control"
+                  type="text"
+                  name="destinataire"
+                  placeholder="Destinataire"
+                  required
+                />
+                    </div>
+            </div>
+              </div>
+              <div class="col-md-12">
+                <label for="address-des" class="form-check-label">address du destinataire</label>
+                <input 
+                    class="text-dark form-control"
+                    type="text"
+                    name="address-des"
+                    placeholder="address du destinataire"
+                    required
+                />
+              </div>
               <div class="col-md-12">
               <label class="form-check-label" for="code_agency">
                 date
@@ -120,16 +145,38 @@ echo "<div class='message'>".$_SESSION['message']."</div>";
                 <div class="row g-3" style=" display:flex!important;justify-content:space-between!important;">
                   <div class="col">
                   <label class="form-check-label" for="code_agent">
-                    Code agent
+                    Agent
                   </label>
-                  <input type="text" id="" value="<?php echo $_SESSION['agent_id'] ?>" disabled>
-
+                  <?php 
+                  $agent_id  =$_SESSION['agent_id'];
+                  $agency_id = $_SESSION['agency_id'];
+                  $stmt_nom_agent = $pdo->prepare("SELECT agent.`name` from agent WHERE `agent`.`code_agent` = $agent_id");
+                  $stmt_nom_agent->execute();
+                  $row = $stmt_nom_agent->fetch(PDO::FETCH_ASSOC);
+                  if($row){
+                    $new_agent_name = $row['name'];
+                  }else{
+                    echo "error";
+                  }
+                  ?>
+                  <input type="text" id="" value="<?php echo $new_agent_name ?>" disabled>
                   </div>
                   <div class="col">
                   <label class="form-check-label" for="code_agency">
                     Code agency
                   </label>
-                  <input type="text" id="" value="<?php echo $_SESSION['agency_id'] ?>" disabled>
+                  <?php 
+                  $agency  =$_SESSION['agency_id'];
+                  $stmt_nom_agency = $pdo->prepare("SELECT agency.`nom_agency` from agency WHERE `agency`.`code_agency` = $agency_id");
+                  $stmt_nom_agency->execute();
+                  $row = $stmt_nom_agency->fetch(PDO::FETCH_ASSOC);
+                  if($row){
+                    $new_agency_name = $row['nom_agency'];
+                  }else{
+                    echo "error";
+                  }
+                  ?>
+                  <input type="text" id="" value="<?php echo  $new_agency_name?>" disabled>
 
                   </div>
                 </div>
@@ -145,7 +192,7 @@ echo "<div class='message'>".$_SESSION['message']."</div>";
                     <div class="col">
                     <input class="form-check-input" type="checkbox" name="cache_en_delivery" value="" id="cache_en_delivery">
               <label class="form-check-label" for="cache_en_delivery">
-                Cache en delivery
+                cash on delivery
               </label>
 
                     </div>

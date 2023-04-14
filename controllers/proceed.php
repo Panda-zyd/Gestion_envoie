@@ -14,6 +14,8 @@ if (isset($_SESSION)){
         $price = $_POST['price'];
         $destination = $_POST['destination'];
         $date = $_POST['date'];
+        $destinataire = $_POST['destinataire'];
+        $address_destinataire = $_POST['address-des'];
         $code_agent = $_POST['code_agent'];
         $code_agency = $_POST['code_agency'];
         $fragile = $_POST['fragile'];
@@ -28,7 +30,7 @@ if (isset($_SESSION)){
         }else{
             $cache_en_delivery = 0;
         }
-        $stmt = $pdo->prepare("INSERT INTO `package`(`expediteur`, `type`, `prix`, `destination`, `date`, `code_agency`, `code_agent`, `fragile`, `cache_en_delivery`) VALUES (:expediteur,:type,:price,:destination,:date,:code_agent,:code_agency,:fragile,:cache_en_delivery)");
+        $stmt = $pdo->prepare("INSERT INTO `package`(`expediteur`, `type`, `prix`, `destination`, `date`, `code_agency`, `code_agent`, `fragile`, `cache_en_delivery`, `destinataire`, `destinataire_adress`) VALUES (:expediteur,:type,:price,:destination,:date,:code_agent,:code_agency,:fragile,:cache_en_delivery,:destinataire,:destinataire_adress)");
         $stmt->execute([
             'expediteur' => $expediteur,
             'type' => $type,
@@ -37,6 +39,8 @@ if (isset($_SESSION)){
             'date' => $date,
             'code_agent' => $code_agent,
             'code_agency' => $code_agency,
+            'destinataire'=>$destinataire,
+            'destinataire_adress'=>$address_destinataire,
             'fragile' => $fragile,
             'cache_en_delivery' => $cache_en_delivery
         ]);
@@ -48,7 +52,8 @@ if (isset($_SESSION)){
             $_SESSION['message_failed'] = "Une erreur est survenue";
             $_SESSION['worked'] = false;
         }
-        header("Location: ../views/dashboard.php");
+        echo "<a href='../views/dashboard.php'>GO back</a>";
+        // header("Location: ../views/dashboard.php");
     }
 }
 ob_flush();

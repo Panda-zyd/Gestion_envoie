@@ -12,7 +12,18 @@
   justify-content: space-between;
   padding: 15px 45px;
 }
-.message-success{
+
+.header img {
+  pointer-events: none;
+}
+
+.show {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.message-success {
+  transition: .3s ease;
   position: absolute;
   top: 0;
   left: 50%;
@@ -24,8 +35,23 @@
   box-shadow: 0px 0px 50px 1px green;
   border-bottom-right-radius: 7px;
   border-bottom-left-radius: 7px;
+  animation: hide .3s ease forwards;
+  animation-delay: 3s;
 }
-.message-failed{
+
+@keyframes hide {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+
+.message-failed {
   position: absolute;
   top: 0;
   left: 50%;
