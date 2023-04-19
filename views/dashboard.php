@@ -5,9 +5,9 @@ if(!isset($_SESSION['email'])){
   header("Location: index.php");
 };
 if(isset($_SESSION['worked'])and $_SESSION['worked']){
-echo "<div id='message-success' class='message-success'>".$_SESSION['message_success']."</div>";
+echo "<div id='message-success' class='message-success alert alert-success'>".$_SESSION['message_success']."</div>";
 }else if(isset($_SESSION['message_failed'])){
-    echo "<div id='message-failed' class='message-failed'>".$_SESSION['message_failed']."</div>";
+    echo "<div id='message-failed' class='message-failed alert alert-danger'>".$_SESSION['message_failed']."</div>";
 }
 unset($_SESSION['worked']);
 unset($_SESSION['message_failed']);
@@ -27,13 +27,7 @@ unset($_SESSION['message_failed']);
 </style>
 <body onload="load()">
   <div id="root"></div>
-  <div class='header'>
-    <div><img src="../assets/poste_logo.png" draggable="false" atr="Logo Post" /></div>
-    <div class="user">
-      <div class="welcome">Welcome <?php echo $_SESSION['username'] ?> </div>
-      <div><button class="btn btn-danger" onclick="location.href='../controllers/logout.php'">Logout</button></div>
-    </div>
-</div>
+  <?php include("../components/header.employe.php") ?>
 <div class="main">
 <div class="form-body">
         <div class="row">

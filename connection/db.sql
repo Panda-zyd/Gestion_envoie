@@ -11,7 +11,7 @@ ELSEIF NEW.type = "courier" THEN
     IF NEW.code_package is null then
         SET new_code_package = CONCAT("CR", LPAD(last_code_package, 9-length(last_code_package), '0'), "MA");
     else
-        set new_code_package = CONCAT("CR", LPAD(NEW.code_package, 9, '0'), "MA")
+        set new_code_package = CONCAT("CR", LPAD(NEW.code_package, 9, '0'), "MA");
 ELSE
     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = "Invalid package type";
 END IF;

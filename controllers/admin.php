@@ -15,6 +15,8 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     $_SESSION['username'] = $row['username'];
     $_SESSION['password'] = $row['password'];
     header('location: ../views/dashboard.admin.php');
+  }else {
+    header("Location: ../views/admin.php");
   }
-}
+} 
 ?>

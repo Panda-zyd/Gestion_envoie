@@ -12,133 +12,50 @@ session_start();
   <title>Document</title>
 </head>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
   <?php require("../styles/dashboard.css"); ?>
+  body{
+    min-height: 100vh;
+  }
+  .main{
+    height:100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .header{
+    /* height: 80px */
+  }
+  .page{
+    font-family: 'Montserrat', sans-serif;
+    flex: 1;
+    font-weight: 1000 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .page form{
+    margin-inline: 20px
+  }
+  .page form a{
+    width: 200px;
+    padding: 12px;
+  }
+  .page form a:hover{
+    background-color: blue !important;
+  }
 </style>
-<body onload="load()">
-  <div id="root"></div>
-  <div class='header'>
-    <div><img src="../assets/poste_logo.png" draggable="false" atr="Logo Post" /></div>
-    <div class="user">
-      <div class="welcome">Welcome <?php echo $_SESSION['username'] ?> </div>
-      <div><button class="btn btn-danger" onclick="location.href='../controllers/logout.php'">Logout</button></div>
-    </div>
-</div>
-<div class="main">
-<div class="form-body">
-        <div class="row">
-            <div class="form-holder">
-                <div class="form-content">
-                    <div class="form-items">
-                        <h3>
-                          Calculer le prix
-                        </h3>
-                        <form class="requires-validation" id="myForm" method="post">
-                            <div class="col-md-12">
-                                <input class="text-dark form-control" id="input" type="number" name="poids" placeholder="Poids" required>
-                                <select name="type" id="type" required>
-                                  <option value="kg">Kg</option>
-                                  <option value="g">g</option>
-                                </select>
-                            </div>
-                           <div>
-                           </div>
-                            <div class="form-button mt-3">
-                                <button id="submit" type="submit" class="btn btn-primary">Afficher les prix</button>
-                            </div>
-                        </form>
-                        <div id="result"></div>
-                </div>
-              </div>
-              <div id="table">
-                <table border=1>
-                  <tr>
-                    <th>Produit</th>
-                    <th>Prix</th>
-                    <th>Action</th>
-                  </tr>
-                  <tr>
-                    <td>
-                      colis
-                    </td>
-                    <td>
-                    <?php
-                  if(isset($_POST['poids'])){
-                    $poids = $_POST['poids'];
-                      $type = $_POST['type'];
-                      if($type != "kg") {
-                          $poids = $poids / 1000;
-                      }
-                    $stmt2 = $pdo->prepare('SELECT `price` FROM `tarif_par_produit_colis` WHERE `from` < :lepoids AND `to`>= :lepoids');
-                    $stmt2->execute(['lepoids' => $poids]);
-                    $row = $stmt2->fetch(PDO::FETCH_ASSOC);
-                    if($row){
-                        echo "<div>".$row['price']."</div>";
-                          $courier_price = $row['price'];
-                    }
-                        else{
-                            echo "<div>-</div>";
-                        }
-                     } else {
-                      echo "<script>document.querySelector('#table').style.display = 'none'</script>";
-                  }
-                ?>
-                    </td>
-                    <td>
-                    <?php 
-                    if(!empty($courier_price)){
-                      echo "<a 
-                      href='proceed.php?type=colis&price=".$courier_price."' 
-                      class='proceed'>Proceed</a>";
-                    }else{
-                      echo "<a href='#' class='proceed disabled-link'>Proceed</a>";
-                    }
-                    ?>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>courrier</td>
-                    <td>
-                        <?php
-                        if(isset($_POST['poids'])){
-                            $poids = $_POST['poids'];
-                            $type = $_POST['type'];
-                            if($type != "kg") {
-                                $poids = $poids / 1000;
-                            }
-                            global $pdo;
-                            $stmt2 = $pdo->prepare('SELECT `price` FROM `tarif_par_produit_courier` WHERE `from` < :lepoids AND `to`>=:lepoids');
-                            $stmt2->execute(['lepoids' => $poids]);
-                            $username = $stmt2->fetch(PDO::FETCH_ASSOC);
-                            if(!empty($username)){
-                                echo "<div>".$username['price']."</div>";
-                                $newprice = $username['price'];
-                            }
-                            else {
-                                echo "<div>-</div>";
-                            }
-                        }
-                        ?>
-                    </td>
-                    <td>
-                    <?php 
-                      // $link = "proceed/page.php?type=courier&" . http_build_query(array("theprice" => $row['price'])); 
-                      //   echo "<a class='proceed' href='$link'>Proceed</a>";
-                      if(!empty($newprice)){
-                        echo "<a href='proceed.php?type=courier&price=".$newprice."' class='proceed'>Proceed</a>";
-                      }else{
-                        echo "<a href='#' class='proceed disabled-link'>Proceed</a>";
-                      }
-                      ?>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-        </div>
-    </div>
-
-
-</div>
-
+<body>
+  <div class="main">
+  <?php include("../components/header.admin.php"); ?>
+  <div class="page">
+    <form action="../controllers/employees.php" method="post">
+      <a class="btn btn-primary bg-primary" href="userControl.php" name="add_user">Manage Employees</a>
+    </form>
+    <form action="../controllers/addPromo.php" method="post">
+      <a class="btn btn-primary bg-primary" href="promoControl.php" name="add_promo">Add Promo</a>
+    </form>
+  </div>
 </div>
 </body>
 </html>

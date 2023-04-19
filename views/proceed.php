@@ -4,8 +4,6 @@ session_start();
 if(!isset($_SESSION['email'])){
   header("Location: index.php");
 }
-echo "<div class='message'>".$_SESSION['message']."</div>";
-var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,9 +21,14 @@ var_dump($_SESSION);
   </head>
   <style>
     <?php include("../styles/style.css"); ?>
+    <?php include("../styles/sidebar_style.css"); ?>
+
   </style>
 </html>
 <body style="overflow-y:auto">
+<?php include("../components/header.admin.php"); ?>
+<?php include("../components/sidebar.employee.php"); ?>
+
   <div class="form-body">
       <div class="message">
 <!--          --><?php //if(isset($_SESSION['message'])){
@@ -139,7 +142,8 @@ var_dump($_SESSION);
               <label class="form-check-label" for="code_agency">
                 date
               </label>
-                <input type="date" id="day-input" name="date" min="2023-01-01">
+                <input type="hidden" name="date" value="<?php echo date("d/m/Y") ?>">
+                <input type="text" disabled value="<?php echo date("d/m/Y") ?>">
               </div>
               <div class="col-md-12">
                 <div class="row g-3" style=" display:flex!important;justify-content:space-between!important;">

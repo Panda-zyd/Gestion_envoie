@@ -2,13 +2,8 @@
 require("../connection/conn.php");
 session_start();
 ob_start();
-var_dump($_SESSION);
-echo "<hr />";
-var_dump($_POST);
-echo "<hr/>";
-var_dump($_SERVER);
-if (isset($_SESSION)){
-    if($_SERVER['REQUEST_METHOD']=='POST'){
+if (isset($_SESSION)) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $expediteur = $_POST['expediteur'];
         $type = $_POST['type'];
         $price = $_POST['price'];
@@ -20,14 +15,14 @@ if (isset($_SESSION)){
         $code_agency = $_POST['code_agency'];
         $fragile = $_POST['fragile'];
         $cache_en_delivery = $_POST['cache_en_delivery'];
-        if(isset($fragile)){
+        if (isset($fragile)) {
             $fragile = 1;
-        }else{
+        } else {
             $fragile = 0;
         }
-        if(isset($cache_en_delivery)){
+        if (isset($cache_en_delivery)) {
             $cache_en_delivery = 1;
-        }else{
+        } else {
             $cache_en_delivery = 0;
         }
         $stmt = $pdo->prepare("INSERT INTO `package`(`expediteur`, `type`, `prix`, `destination`, `date`, `code_agency`, `code_agent`, `fragile`, `cache_en_delivery`, `destinataire`, `destinataire_adress`) VALUES (:expediteur,:type,:price,:destination,:date,:code_agent,:code_agency,:fragile,:cache_en_delivery,:destinataire,:destinataire_adress)");
@@ -39,21 +34,21 @@ if (isset($_SESSION)){
             'date' => $date,
             'code_agent' => $code_agent,
             'code_agency' => $code_agency,
-            'destinataire'=>$destinataire,
-            'destinataire_adress'=>$address_destinataire,
+            'destinataire' => $destinataire,
+            'destinataire_adress' => $address_destinataire,
             'fragile' => $fragile,
             'cache_en_delivery' => $cache_en_delivery
         ]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if(isset($row)){
+        if (isset($row)) {
             $_SESSION['message_success'] = "votre commande a été envoyée avec succès";
             $_SESSION['worked'] = true;
-        } else{
+        } else {
             $_SESSION['message_failed'] = "Une erreur est survenue";
             $_SESSION['worked'] = false;
         }
         echo "<a href='../views/dashboard.php'>GO back</a>";
-        // header("Location: ../views/dashboard.php");
+        header("Location: ../views/dashboard.php");
     }
 }
 ob_flush();

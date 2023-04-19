@@ -1,0 +1,14 @@
+.user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user .welcome {
+  margin-right: 12px;
+}
+
+.side-bar {
+  background-color: yellow;
+}

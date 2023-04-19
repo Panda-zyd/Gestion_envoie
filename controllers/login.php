@@ -11,16 +11,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $stmt->execute(['email' => $email, 'password' => $password]);
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 if ($row) {
-    if($row['status']!='active'){
+    var_dump($row);
+    function checkStatus($status){
+        if($status=='active'){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    if(checkStatus($row['status'])){
+        $_SESSION['agent_id'] = $row['code_agent'];
+        $_SESSION['agency_id'] = $row['code_agency'];
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['username'] = $row['name'];
+        header('Location: ../views/dashboard.php');
+    } else{
         $_SESSION['inactive_user'] = "This account is no longer functional";
         header("Location: ../views/index.php");
     }
-    $_SESSION['agent_id'] = $row['code_agent'];
-    $_SESSION['agency_id'] = $row['code_agency'];
-    $_SESSION['email'] = $row['email'];
-    $_SESSION['username'] = $row['name'];
-
-    header('Location: ../views/dashboard.php');
+    // var_dump($_SESSION);
 } else if(!$row) {
     $_SESSION['error'] = "Invalid Email or password";
     header('Location: ../views/index.php');
