@@ -25,7 +25,7 @@ if (isset($_SESSION)) {
         } else {
             $cache_en_delivery = 0;
         }
-        $stmt = $pdo->prepare("INSERT INTO `package`(`expediteur`, `type`, `prix`, `destination`, `date`, `code_agency`, `code_agent`, `fragile`, `cache_en_delivery`, `destinataire`, `destinataire_adress`) VALUES (:expediteur,:type,:price,:destination,:date,:code_agent,:code_agency,:fragile,:cache_en_delivery,:destinataire,:destinataire_adress)");
+        $stmt = $pdo->prepare("INSERT INTO `package`(`expediteur`, `type`, `prix`, `destination`, `date`, `code_agent`, `code_agency`, `fragile`, `cache_en_delivery`, `destinataire`, `destinataire_adress`) VALUES (:expediteur,:type,:price,:destination,:date,:code_agent,:code_agency,:fragile,:cache_en_delivery,:destinataire,:destinataire_adress)");
         $stmt->execute([
             'expediteur' => $expediteur,
             'type' => $type,

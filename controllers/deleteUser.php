@@ -12,6 +12,6 @@ if (!empty($stmt)) {
   $_SESSION['message'] = "Agent deleted Successfully";
 } else {
   $_SESSION['messageType'] = "failure";
-  $_SESSION['message'] = "An error occurred";
+  $_SESSION['message'] = "An error occured";
 }
 header("Location: ../views/userControl.php");

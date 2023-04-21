@@ -24,13 +24,13 @@ if ($row) {
         $_SESSION['agency_id'] = $row['code_agency'];
         $_SESSION['email'] = $row['email'];
         $_SESSION['username'] = $row['name'];
-        header('Location: ../views/dashboard.php');
+        header('Location: ../views/home.php');
     } else{
         $_SESSION['inactive_user'] = "This account is no longer functional";
         header("Location: ../views/index.php");
     }
     // var_dump($_SESSION);
-} else if(!$row) {
+} else {
     $_SESSION['error'] = "Invalid Email or password";
     header('Location: ../views/index.php');
 }

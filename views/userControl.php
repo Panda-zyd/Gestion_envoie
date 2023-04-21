@@ -2,14 +2,14 @@
 require("../connection/conn.php");
 session_start();
 if (!isset($_SESSION['username'])) {
-  header("Location: ../views/index.php");
+    header("Location: ../views/index.php");
 }
 if (isset($_SESSION['message'])) {
-  if ($_SESSION['messageType'] == 'success') {
-    echo "<div id='message-success' class='message-success'>" . $_SESSION['message'] . "</div>";
-  } else if ($_SESSION['messageType'] == 'error') {
-    echo "<div id='message-success' class='message-error'>" . $_SESSION['message'] . "</div>";
-  }
+    if ($_SESSION['messageType'] == 'success') {
+        echo "<div id='message-success' class='message-success'>" . $_SESSION['message'] . "</div>";
+    } elseif ($_SESSION['messageType'] == 'error') {
+        echo "<div id='message-success' class='message-error'>" . $_SESSION['message'] . "</div>";
+    }
 }
 unset($_SESSION['message']);
 ?>
@@ -27,12 +27,31 @@ unset($_SESSION['message']);
 <style>
   <?php include("../styles/dashboard.css"); ?>
   <?php include("../styles/userControl.css"); ?>
+  <?php include("../styles/side_admin.css"); ?>
+  .side_nav{
+    height: 100%;
+    position: sticky;
+    top: 0;
+  }
+  body{
+    overflow: hidden;
+  }
+  .main{
+    overflow: scroll;
+  }
+  .password input{
+    width: 0;
+  }
 </style>
 
 <body>
   <?php include("../components/header.admin.php"); ?>
   <div class="btn btn-primary add_user bg-success">+add user</div>
-  <div class="container">
+  <div class="main">
+    <div class="side_nav">
+    <?php include("../components/sidebar.admin.php"); ?>
+    </div>
+    <div>
     <h1 class="text-center" style="color: white">Employees Manager</h1>
     <div class="row">
       <div class="col">
@@ -52,28 +71,34 @@ unset($_SESSION['message']);
           $rows = $stmt->fetchAll();
           foreach ($rows as $row) {
               if($row['status'] != 'inactive' or $row['status']='') { ?>
-            <tr>
-              <td>
-                <?php echo $row['code_agent']; ?>
-              </td>
-              <td>
-                <?php echo $row['name']; ?>
-              </td>
-              <td>
-                <?php echo $row['email']; ?>
-              </td>
-              <td class="passwordd">
-                <input type="password" value="<?php echo $row['password']; ?>"
-                  id="passwordd_<?php echo $row['code_agent']; ?>">
-                <?php
-        echo "<button type='button' class='a-weir' onclick='togglePassword(`passwordd_" . $row['code_agent'] . "`)'>
-      ";
-        ?>
+                      <tr>
+                        <td>
+                          <?php echo $row['code_agent']; ?>
+                        </td>
+                        <td>
+                          <?php echo $row['name']; ?>
+                        </td>
+                        <td>
+                          <?php echo $row['email']; ?>
+                        </td>
+                        <td class="passwordd">
+                          <input class="form-input w-75" type="password" value="<?php echo $row['password']; ?>"
+                            id="passwordd_<?php echo $row['code_agent']; ?>">
+                          <?php
+                  echo "<button type='button' class='a-weir' onclick='togglePassword(`passwordd_" . $row['code_agent'] . "`)'>
+                ";
+                  ?>
                 <img src="../assets/eye-open.svg" height="20px" />
                 </button>
               </td>
               <td>
-                <?php echo $row['code_agency']; ?>
+              <?php
+              $row_agency = $row['code_agency'];
+                $stmt2 = $pdo->prepare("SELECT `nom_agency` from `agency` where `agency`.`code_agency`=$row_agency");
+                $stmt2->execute();
+                $code = $stmt2->fetch(PDO::FETCH_ASSOC);
+                 echo $row['code_agency']; ?><br>
+                 (<?php echo $code['nom_agency'] ; ?>)
               </td>
               <td>
                 <?php echo $row['status']; ?>
@@ -95,35 +120,19 @@ unset($_SESSION['message']);
                 </form>
               </td>
             </tr>
-            <?php
-    }else{
-    }
-}
-          ?>
+                    <?php
+            } else {
+            }
+        }
+        ?>
 
         </table>
 
       </div>
     </div>
   </div>
-
-  <!-- <div class="deletion-form">
-    <div class="form-group">
-      <form action="../controllers/deleteUser.php" method="post" class="delete-form">
-      <div class="modal" id="modal">
-        <div class="modal-content">
-          <h2>User
-            Are you sure?
-          </h2>
-          <p>This action cannot be undone.</p>
-          <div class="buttons">
-            <button type="button" class="button cancel" onclick="cancelDelete()">Cancel</button>
-            <button type="submit" class=" button delete">Delete</button>
-          </div>
-        </div>
-      </div>
-      </form> -->
   </div>
+      </div>
   </div>
   <script>
 

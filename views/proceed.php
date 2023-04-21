@@ -22,25 +22,26 @@ if(!isset($_SESSION['email'])){
   <style>
     <?php include("../styles/style.css"); ?>
     <?php include("../styles/sidebar_style.css"); ?>
+    <?php include("../styles/proceed.css"); ?>
 
   </style>
 </html>
 <body style="overflow-y:auto">
 <?php include("../components/header.admin.php"); ?>
+<div class="main">
 <?php include("../components/sidebar.employee.php"); ?>
 
-  <div class="form-body">
       <div class="message">
 <!--          --><?php //if(isset($_SESSION['message'])){
 //              echo "<script>alert(`".$_SESSION['message']."`)</script>";
 //          } ?>
       </div>
-    <div class="row">
+    <div class="didi"></div>
+    <div class="container-fluid">
       <div class="form-holder">
         <div class="form-content">
           <div class="form-items">
-            <h3>Proceed The order</h3>
-            <p>Fill in the data below.</p>
+            <h3 class="text-center">Proceed The order</h3>
             <form
               class="requires-validation"
               action="../controllers/proceed.php"
@@ -139,11 +140,11 @@ if(!isset($_SESSION['email'])){
                 />
               </div>
               <div class="col-md-12">
-              <label class="form-check-label" for="code_agency">
-                date
-              </label>
-                <input type="hidden" name="date" value="<?php echo date("d/m/Y") ?>">
-                <input type="text" disabled value="<?php echo date("d/m/Y") ?>">
+<!--              <label class="form-check-label" for="code_agency">-->
+<!--                date-->
+<!--              </label>-->
+                <input type="hidden" name="date" value="<?php echo date("Y/m/d") ?>">
+                <input type="text" disabled value="<?php echo date("Y/m/d") ?>">
               </div>
               <div class="col-md-12">
                 <div class="row g-3" style=" display:flex!important;justify-content:space-between!important;">

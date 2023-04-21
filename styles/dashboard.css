@@ -8,11 +8,15 @@
   align-items: center;
   position: sticky;
   top: 0;
-  font-family: 'Schibsted Grotesk', sans-serif;
   justify-content: space-between;
   padding: 15px 45px;
 }
-
+*{
+  font-family: 'Schibsted Grotesk', sans-serif;
+}
+body{
+  min-height: 100vh;
+}
 .header img {
   pointer-events: none;
 }
@@ -21,7 +25,10 @@
   pointer-events: none;
   opacity: 0;
 }
-
+.main{
+  display: flex;
+  height: 100%;
+}
 
 .message-success {
   transition: .3s ease;

@@ -14,14 +14,19 @@ session_start();
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
   <?php require("../styles/dashboard.css"); ?>
+  <?php include("../styles/side_admin.css"); ?>
   body{
     min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
   }
+
   .main{
-    height:100vh;
+    flex-grow: 1;
     width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
   }
   .header{
     /* height: 80px */
@@ -46,16 +51,16 @@ session_start();
   }
 </style>
 <body>
-  <div class="main">
+<header>
+
   <?php include("../components/header.admin.php"); ?>
-  <div class="page">
-    <form action="../controllers/employees.php" method="post">
-      <a class="btn btn-primary bg-primary" href="userControl.php" name="add_user">Manage Employees</a>
-    </form>
-    <form action="../controllers/addPromo.php" method="post">
-      <a class="btn btn-primary bg-primary" href="promoControl.php" name="add_promo">Add Promo</a>
-    </form>
-  </div>
-</div>
+</header>
+    <div class="main">
+      <?php include("../components/sidebar.admin.php"); ?>
+      <div class="page">
+      <iframe src="../assets/histoiredelaposte.pdf" width="100%" height="600px" aria-controls="false">
+            </iframe>
+      </div>
+    </div>
 </body>
 </html>

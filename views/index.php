@@ -25,6 +25,9 @@ if(isset($_SESSION['inactive_user'])){
 </head>
 <style>
   <?php require("../styles/style.css") ?>
+    .form-holder{
+        overflow: hidden;
+    }
 </style>
 <body>
 <div class='header'>
