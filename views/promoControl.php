@@ -18,8 +18,17 @@ if (!isset($_SESSION['username'])) {
 </head>
 <style>
   <?php include("../styles/dashboard.css"); ?>
+  <?php include("../styles/side_admin.css"); ?>
+    body{
+        overflow: hidden;
+    }
 </style>
 
 <body>
   <?php include("../components/header.admin.php"); ?>
+<div class="main">
+    <?php include("../components/sidebar.admin.php"); ?>
+<!--    <iframe src="../assets/histoiredelaposte.pdf" width="100%" height="100%"></iframe>-->
+    <div class="promo"></div>
+</div>
 </body>

@@ -4,14 +4,29 @@ session_start();
 if (!isset($_SESSION['username'])) {
     header("Location: ../views/index.php");
 }
-if (isset($_SESSION['message'])) {
-    if ($_SESSION['messageType'] == 'success') {
-        echo "<div id='message-success' class='message-success'>" . $_SESSION['message'] . "</div>";
-    } elseif ($_SESSION['messageType'] == 'error') {
-        echo "<div id='message-success' class='message-error'>" . $_SESSION['message'] . "</div>";
+if(isset($_SESSION['update_message'])){
+    if($_SESSION['updated']){
+        echo "<div class='message-success'> ".$_SESSION['update_message']."</div>";
+    } else {
+        echo "<div class='message-failed''> ".$_SESSION['update_message']."</div>";
     }
 }
-unset($_SESSION['message']);
+unset($_SESSION["update_message"]);
+if(isset($_SESSION['add_message'])){
+    if($_SESSION['user_added']){
+    echo "<div class='message-success'>".$_SESSION['add_message']."</div>";
+    }
+else {
+        echo "<div class='message-failed'> ".$_SESSION['add_message']."</div>";
+    }}
+unset($_SESSION['add_message']);
+//if (isset($_SESSION['message'])) {
+//    if ($_SESSION['messageType'] == 'success') {
+//        echo "<div id='message-success' class='message-success'>" . $_SESSION['message'] . "</div>";
+//    } elseif ($_SESSION['messageType'] == 'error') {
+//        echo "<div id='message-success' class='message-error'>" . $_SESSION['message'] . "</div>";
+//    }
+//}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,14 +54,30 @@ unset($_SESSION['message']);
   .main{
     overflow: scroll;
   }
+  .add_user{
+    transition: .3s ease;
+    right: 48px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 20px 4px black
+  }
+  .add_user:hover{
+    transform: scale(1.1);
+  }
+  .add_user a{
+    text-decoration: none;
+    color: white;
+  }
   .password input{
     width: 0;
+  }
+  table{
+      border-bottom: 56px solid transparent;
   }
 </style>
 
 <body>
   <?php include("../components/header.admin.php"); ?>
-  <div class="btn btn-primary add_user bg-success">+add user</div>
+  <div class="btn btn-primary add_user bg-success"><a href="../views/adduser.php">Add user <span class="badge badge-light">+</span></a></div>
   <div class="main">
     <div class="side_nav">
     <?php include("../components/sidebar.admin.php"); ?>
@@ -105,9 +136,9 @@ unset($_SESSION['message']);
               </td>
 
               <td class='td'>
-                <form method="post" action="../controllers/editUser.php">
+                <form method="post" action="../views/editUser.php">
                   <input type="hidden" name="code_agent" value="<?php echo $row['code_agent'] ?>">
-                  <button class="btn btn-primary bg-primary" href="#">
+                  <button type="submit" class="btn btn-primary bg-primary" href="#">
                     <img src="../assets/edit.svg" height="20px" />
                   </button>
                 </form>
@@ -127,7 +158,7 @@ unset($_SESSION['message']);
         ?>
 
         </table>
-
+            
       </div>
     </div>
   </div>
@@ -135,6 +166,19 @@ unset($_SESSION['message']);
       </div>
   </div>
   <script>
+        function togglePassword(id) {
+          var passwordField = document.getElementById(id);
+          var button = passwordField.nextElementSibling;
+          if (passwordField.type === "password") {
+            passwordField.type = "text";
+            button.innerHTML = '<img src="../assets/eye-closed.svg" height="20px" />';
+          } else {
+            passwordField.type = "password";
+            button.innerHTML = '<img src="../assets/eye-open.svg" height="20px" />';
+          }
+        }
+        </script>
+
 
     // function sendValue(myValue) {
     //   var value = myValue; // the value you want to send
@@ -165,17 +209,6 @@ unset($_SESSION['message']);
     //   modal.style.display = "block";
     // }
 
-    function togglePassword(id) {
-      var passwordField = document.getElementById(id);
-      var button = passwordField.nextElementSibling;
-      if (passwordField.type === "password") {
-        passwordField.type = "text";
-        button.innerHTML = '<img src="../assets/eye-closed.svg" height="20px" />';
-      } else {
-        passwordField.type = "password";
-        button.innerHTML = '<img src="../assets/eye-open.svg" height="20px" />';
-      }
-  }
   </script>
 
 </body>

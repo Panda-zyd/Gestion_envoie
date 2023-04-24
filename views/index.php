@@ -36,6 +36,7 @@ if(isset($_SESSION['inactive_user'])){
       <a href="../views/admin.php" title="go to admin dashboard" class="btn btn-warning">admin</a>
     </div>
 </div>
+<a href="../controllers/download.php" class="btn btn-primary">Download File</a>
 <div class="form-body">
         <div class="row">
             <div class="form-holder">

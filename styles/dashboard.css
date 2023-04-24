@@ -71,6 +71,8 @@ body{
   box-shadow: 0px 0px 50px 1px red;
   border-bottom-right-radius: 7px;
   border-bottom-left-radius: 7px;
+  animation: hide 3s ease forwards;
+  animation-delay: 3s;
 }
 
 

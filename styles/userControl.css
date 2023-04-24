@@ -123,21 +123,23 @@ table a {
   background-color: #ff3333;
   color: #fff;
 }
-
 .td {
   display: flex;
-  flex-direction: row;
   justify-content: space-around;
   align-items: center;
 }
 
 .td a,
 .td button {
-  display: flex;
+  display: block;
+  transition: .3s ease;
+  margin-inline: 4px;
+}
+.td a{
   align-items: center;
   justify-content: center;
+  display: flex;
 }
-
 table a:hover,
 table button:hover {
   transform: scale(1.1);
