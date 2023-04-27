@@ -12,7 +12,7 @@ $current_url = $_SERVER['REQUEST_URI'];
                   <a href="../views/dashboard.php" class="text-white side-bar-menu-item-link text-decoration-none text-center <?php echo ($current_url=="/gestion_envoie/views/dashboard.php")?"active_side_bar":"" ?>"><i class="fa fa-home"></i>Ajouter</a><!-- END SIDEBAR MENU ITEM -->
                 </li>
                 <li class="two side-bar-menu-item">
-                    <a href="../views/liste_envoie.php" class="text-white side-bar-menu-item-link text-decoration-none text-center <?php echo ($current_url=="/gestion_envoie/views/liste_envoie.php")?"active_side_bar":"" ?>"><i class="fa fa-home"></i>Envoies</a><!-- END SIDEBAR MENU ITEM -->
+                    <a href="../views/liste_envoie.php" class="text-white side-bar-menu-item-link text-decoration-none text-center <?php echo ($current_url=="/gestion_envoie/views/liste_envoie.php")?"active_side_bar":"" ?>"><i class="fa fa-home"></i>Envois</a><!-- END SIDEBAR MENU ITEM -->
                 </li>
             </ul>
         </div>

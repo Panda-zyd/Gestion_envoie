@@ -10,6 +10,7 @@ include("../connection/conn.php");
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -62,7 +63,7 @@ $status_user = $row['status'];
             <input type="hidden" name="id" class="form-control" value="<?php echo $_POST['code_agent'] ?>" id="">
             <label for="name" class="form-label">Name:</label>
             <input type="text" name="name" class="form-control" placeholder="Name" value="<?php echo $row['name'] ?>" id="">
-            <?php $_SESSION['err'] ?>
+            <?php echo isset($_SESSION['err'])?$_SESSION['err']:false ?>
 
             <label for="email" class="form-label">Email:</label>
             <input type="email" name="email" class="form-control" placeholder="email" value="<?php echo $row['email'] ?>"

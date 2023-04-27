@@ -4,12 +4,22 @@ session_start();
 if(!isset($_SESSION['email'])){
     header("Location: ../views/index.php");
 }
+if(isset($_SESSION['message_success'])){
+    if($_SESSION['worked']){
+if(isset($_SESSION["last_id"])){
+    $id = $_SESSION['last_id'];
+}
+//        echo "<div class='alert alert-success text-center'>".$_SESSION['message_success']."<br><a class='link text-decoration-none' href='../views/reciept.php?id=$id'>download receipt</a></div>";
+    }
+}
+if(isset($_SESSION['c_p'])){"hOIJFE ifjiejf hfiehfi".var_dump($_SESSION);};
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
@@ -19,6 +29,26 @@ if(!isset($_SESSION['email'])){
     <?php include("../styles/dashboard.css") ?>
     <?php include("../styles/sidebar_style.css") ?>
     <?php include("../styles/home.css") ?>
+    .alert{
+        position: absolute;
+        z-index: 9898989;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 4px;
+        box-shadow: 0px 0px 50px 5px #d1e7dd;
+        /*animation: hide .3s forwards;*/
+        /*animation-delay: 5s;*/
+    }
+    @keyframes hide {
+        0% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
 </style>
 <body onload="load()">
 <div id="root"></div>
@@ -135,13 +165,8 @@ if(!isset($_SESSION['email'])){
             </div>
         </div>
     </div>
-
-
 </div>
 </body>
 <script>
-    require("../javascript/app.js");
-
-
 </script>
 </html>
