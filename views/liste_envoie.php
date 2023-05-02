@@ -73,7 +73,7 @@ $_SESSION['total_sales'] = $total;
                     <td><?php echo $rows['code_package'] ?></td>
                     <td><?php echo $rows['expediteur'] ?></td>
                     <td><?php echo $rows['type'] ?></td>
-                    <td><?php echo $rows['prix'] ?></td>
+                    <td><?php echo $rows['prix']; ?><?php if($rows['old_price']!=0){echo "<span class='ms-2 bg-primary rounded-3 p-2 text-decoration-line-through'>".$rows['old_price']."</span>";} ?></td>
                     <td class="<?php if($rows['status']=='pending'){echo 'bg-warning';}else if($rows['status']=='delivered'){echo 'bg-success';}else if($rows['status']){echo 'bg-secondary';} ?>"><?php echo $rows['status'] ?></td>
                     <td><?php echo $rows['date'] ?></td>
                     <td><?php echo $rows['destinataire'] ?></td>
@@ -103,11 +103,11 @@ $_SESSION['total_sales'] = $total;
         ?>
         </table>
     <?php
-        if(!($_SESSION['total']==0) and isset($_SESSION['total'])){?>
+        if(isset($_SESSION['total']) and ($_SESSION['total']!=0) ){?>
             <div id="today" class="selection">Total by Selection: <?php echo $_SESSION['total']; ?></div><?php
         } else{
             ?>
-            <div id="today">Total Today: <?php echo implode(",", $_SESSION['total_sales']); ?></div>
+            <div id="today">Total Today: <?php echo (implode(",", $_SESSION['total_sales'])==null?"0":implode(",", $_SESSION['total_sales'])); ?></div>
         <?php
         }
         unset($_SESSION['total']);

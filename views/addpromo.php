@@ -79,10 +79,7 @@ unset($_SESSION['my_err']);
             <label for="amount" class="form-label">Percentage: </label>
             <input type="number" class="form-control" max="100" min="1" required name="amount" placeholder="Amount" />
             <label class="form-label" for="type">Type: </label>
-<!--            <select class="form-control" name="type" required>-->
-<!--                <option value="courier">Courier</option>-->
-<!--                <option value="colis">Colis</option>-->
-<!--            </select>-->
+
             <label for="start_date" class="form-label">Start date: </label>
             <input class="form-control" id="start_date" name="start_date" type="date" placeholder="start_date"  required/>
             <label for="end_date" class="form-label">End date: </label>

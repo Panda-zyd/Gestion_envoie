@@ -26,18 +26,24 @@ if(isset($_SESSION['inactive_user'])){
 </head>
 <style>
   <?php require("../styles/style.css") ?>
+  <?php require("../styles/fade_in.css") ?>
+
     .form-holder{
         overflow: hidden;
     }
+  body, html{
+      background: rgb(2,0,36);
+      background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,71,1) 35%, rgba(0,255,137,1) 100%);
+  }
+
 </style>
-<body>
+<body class="fade-in">
 <div class='header'>
     <div><img src="../assets/poste_logo.png" /></div>
     <div>
       <a href="../views/admin.php" title="go to admin dashboard" class="btn btn-warning">admin</a>
     </div>
 </div>
-<!--<a href="../controllers/download.php" class="btn btn-primary">Download File</a>-->
 <div class="form-body">
         <div class="row">
             <div class="form-holder">
@@ -59,7 +65,7 @@ if(isset($_SESSION['inactive_user'])){
                             } ?>
                            </div>
                             <div class="form-button mt-3">
-                                <button id="submit" type="submit" class="btn btn-primary">Login</button>
+                                <button id="submit" type="submit" class="btn btn-success bg-primary">Login</button>
                             </div>
                         </form>
                     </div>
@@ -68,38 +74,6 @@ if(isset($_SESSION['inactive_user'])){
         </div>
     </div>
 
-  <!-- <form
-    action="../controllers/login.php"
-    class="container form-control d-flex h-100 row g-3"
-    method="post"
-  >
-    <div class="col">
-    <div class="col-lg-6 mx-auto">
-      <label for="email" class="form-label"> Email: </label>
-      <input
-        placeholder="abc@gmail.com"
-        type="email"
-        name="email"
-        id="email"
-        required
-      />
-    </div>
-    <div class="col-lg-6 mx-auto">
-      <label for="password" class="form-label"> Password: </label>
-      <input
-        class="input"
-        placeholder="Password"
-        type="password"
-        name="password"
-        id="password"
-        required
-      />
-    </div>
-    <div class="col-lg-6 mx-auto">
-      <input type="submit" value="Login" class="btn btn-primary mb-3" />
-    </div>
-    </div>
-  </form> -->
 </body>
 <script>
 function check() {
@@ -115,5 +89,7 @@ function check() {
 }
 
 
+
 </script>
+<script src="../scripts/script.js"></script>
 </html>

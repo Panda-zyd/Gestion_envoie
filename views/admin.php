@@ -21,8 +21,14 @@ error_reporting(E_ALL);
 </head>
 <style>
   <?php require("../styles/style.css") ?>
+  <?php require("../styles/fade_in.css") ?>
+  body, html{
+      background: rgb(2,0,36);
+      background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+  }
+
 </style>
-<body>
+<body class="fade-in">
 <div class='header'>
     <div><img src="../assets/poste_logo.png" /></div>
     <div>
@@ -34,7 +40,7 @@ error_reporting(E_ALL);
             <div class="form-holder">
                 <div class="form-content">
                     <div class="form-items">
-                        <h3>ADMIN AUTHENTIFICATION</h3>
+                        <h3>ADMIN AUTHENTICATION</h3>
                         <p>Fill in the data below.</p>
                         <form class="requires-validation" action="../controllers/admin.php" method="post">
                             <div class="col-md-12">
@@ -50,7 +56,7 @@ error_reporting(E_ALL);
                             } ?>
                            </div>
                             <div class="form-button mt-3">
-                                <button id="submit" type="submit" class="btn btn-primary">Login</button>
+                                <button id="submit" type="submit" class="btn btn-primary bg-primary">Login</button>
                             </div>
                         </form>
                     </div>
@@ -59,38 +65,6 @@ error_reporting(E_ALL);
         </div>
     </div>
 
-  <!-- <form
-    action="../controllers/login.php"
-    class="container form-control d-flex h-100 row g-3"
-    method="post"
-  >
-    <div class="col">
-    <div class="col-lg-6 mx-auto">
-      <label for="email" class="form-label"> Email: </label>
-      <input
-        placeholder="abc@gmail.com"
-        type="email"
-        name="email"
-        id="email"
-        required
-      />
-    </div>
-    <div class="col-lg-6 mx-auto">
-      <label for="password" class="form-label"> Password: </label>
-      <input
-        class="input"
-        placeholder="Password"
-        type="password"
-        name="password"
-        id="password"
-        required
-      />
-    </div>
-    <div class="col-lg-6 mx-auto">
-      <input type="submit" value="Login" class="btn btn-primary mb-3" />
-    </div>
-    </div>
-  </form> -->
 </body>
 <script>
 function check() {
@@ -104,7 +78,13 @@ function check() {
     form.classList.add("was-validated");
   });
 }
+const element = document.querySelector('.fade-in');
+element.addEventListener('animationend', () => {
+    element.classList.remove('fade-in');
+});
+
 
 
 </script>
+<script src="../scripts/script.js"></script>
 </html>

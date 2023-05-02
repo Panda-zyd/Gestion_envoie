@@ -118,27 +118,9 @@ if(isset($_SESSION['user_added'])){
                   foreach($row as $rows){
                     echo "<option value=".$rows['code_agency'].">".$rows['nom_agency']."</option>";
                   }};
-                  
-                // $me = $rows['nom_agency'];
-                // $new = $pdo->prepare("SELECT `code_agency` from `agency` where `nom_agency` LIKE ");
-                // $new->execute();
-                // $result = $new->fetch(PDO::FETCH_ASSOC);
-                // $_SESSION['code_agency'] = $result['code_agency'];
               ?>
               <!-- <input type="text" value="<?php echo $_SESSION['code_agency'] ?>" name="code_agency" /> -->
             </select><br>
-            <!-- 
-              <select class="selectpicker form-control border-0 mb-1 px-4 py-4 rounded shadow">
-                            <option value="Ultrasound Knee Right">Ultrasound Knee Right</option>
-                            <option value="Ultrasound Knee Left">Ultrasound Knee Left</option>
-                            <option value="MRI Knee Right">MRI Knee Right</option>
-                            <option value="MRI Knee Left">MRI Knee Left</option>
-                            <option value="MRI Forearm/Elbow Right">MRI Forearm/Elbow Right</option>
-                            <option value="MRI Forearm/Elbow Left">MRI Forearm/Elbow Left</option>
-                            <option value="CT Knee Right">CT Knee Right</option>
-                            <option value="CT Knee Left">CT Knee Left</option>
-                        </select>
-             -->
 
             <label for="status" class="form-label">Status:</label>
 

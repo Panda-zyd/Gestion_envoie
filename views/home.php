@@ -20,8 +20,10 @@ if(!isset($_SESSION['email'])){
     <?php include("../styles/dashboard.css") ?>
     <?php include("../styles/sidebar_style.css") ?>
     <?php include("../styles/home.css") ?>
+    <?php include("../styles/fade_in.css") ?>
+
 </style>
-<body onload="load()">
+<body class="fade-in" onload="load()">
 <div id="root"></div>
 <?php include("../components/header.employe.php") ?>
 <div class="main">
@@ -35,9 +37,6 @@ if(!isset($_SESSION['email'])){
         </div>
 </div>
 </body>
-<script>
-    require("../javascript/app.js");
-
-
+<script src="../scripts/script.js">
 </script>
 </html>
